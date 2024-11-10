@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conexión con MySQL</title>
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+    <ul id="usuarios"></ul>
+
+    <script>
+        // Llamada para obtener los datos de usuarios
+        fetch('conexion.php')
+            .then(response => response.json())
+            .then(data => {
+                const listaUsuarios = document.getElementById("usuarios");
+                data.forEach(usuario => {
+                    const item = document.createElement("li");
+                    item.textContent = `Nombre: ${usuario.nombre}, Email: ${usuario.email}`;
+                    listaUsuarios.appendChild(item);
+                });
+            })
+            .catch(error => console.error("Error al obtener datos:", error));
+    </script>
+</body>
+</html>
